@@ -21,11 +21,7 @@ class TodosController < ApplicationController
     def edit
         @todo = Todo.find(params[:id])
     end
-    
-    def index
-        @todos = Todo.all
-    end
-    
+
     def update
         @todo = Todo.find(params[:id])
         if @todo.update(todo_params)
@@ -35,6 +31,18 @@ class TodosController < ApplicationController
             render 'edit'
         end
         
+    end
+
+    
+    def index
+        @todos = Todo.all
+    end
+
+    def destroy
+        @todo = Todo.find(params[:id])
+        @todo.destroy
+        flash[:notice] = "Todo was deleted succssfully"
+        redirect_to todos_path
     end
     
     private
